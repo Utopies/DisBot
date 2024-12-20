@@ -1,32 +1,30 @@
 ﻿using DSharpPlus;
+using DisBotCS.ReadConfig;
 
-sealed class StartBot
+namespace DisBotCS.Discord;
+
+class StartBot
 {
-    private static DiscordClient  Client { get; set; }
-    
-    public static async Task Main(string[] args)
+    private static DiscordClient Client { get;  set; }
+
+    public static async Task StartBotAsync()
     {
         Client = new DiscordClient(SetConfig());
-        await Client.ConnectAsync();
+        
+        Client.ConnectAsync();
         await Task.Delay(-1);
     }
-
+    
     private static DiscordConfiguration SetConfig()
     {
         var disConfig = new DiscordConfiguration()
         {
             Intents = DiscordIntents.All,
-            Token = ReadToken(),
+            Token = ConfigRead.ReadToken(Bots.Discord),
             TokenType = TokenType.Bot,
             AutoReconnect = true,
         };
-        
+
         return disConfig;
-    }
-    
-    private static string ReadToken()
-    {
-        string token = File.ReadAllText("Token.txt");
-        return token;
     }
 }
