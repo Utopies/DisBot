@@ -1,18 +1,29 @@
-﻿using DSharpPlus;
+﻿using System.Transactions;
+using DSharpPlus;
 using DisBotCS.ReadConfig;
+using DSharpPlus.SlashCommands;
 
 namespace DisBotCS.Discord;
 
 class StartBot
 {
-    private static DiscordClient Client { get;  set; }
+    private static DiscordClient? Client { get;  set; }
 
     public static async Task StartBotAsync()
     {
         Client = new DiscordClient(SetConfig());
         
-        Client.ConnectAsync();
+        RegCommands();
+        
+        await Client.ConnectAsync();
         await Task.Delay(-1);
+    }
+
+    private static void RegCommands()
+    {
+        
+        var slashCommands = Client.UseSlashCommands();
+        slashCommands.RegisterCommands<DisCommand>();
     }
     
     private static DiscordConfiguration SetConfig()
@@ -20,7 +31,7 @@ class StartBot
         var disConfig = new DiscordConfiguration()
         {
             Intents = DiscordIntents.All,
-            Token = ConfigRead.ReadToken(Bots.Discord),
+            Token = ConfRead.ReadToken(Bots.Discord),
             TokenType = TokenType.Bot,
             AutoReconnect = true,
         };
