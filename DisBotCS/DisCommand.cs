@@ -1,7 +1,7 @@
 ﻿using DSharpPlus.SlashCommands;
 using DisBotCS.ReadConfig;
 
-namespace DisBotCS.Discord;
+namespace DisBotCS;
 
 public class DisCommand : ApplicationCommandModule
 {

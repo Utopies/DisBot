@@ -4,23 +4,12 @@ namespace DisBotCS.ReadConfig;
 
 public class ConfRead
 {
-    public static string ReadToken(Bots bots)
+    public static string ReadToken()
     {
         var json = File.ReadAllText("Tokens.json");
         JObject config = JObject.Parse(json);
-
-        string? token;
         
-        switch (bots)
-        {
-            case Bots.Discord:
-                token = config["DisBot"].ToString();
-                return token;
-            case Bots.Telegram: //окей, спасиб
-                return token = config["Telegram"].ToString();
-        }
-        
-        return null;
+        return config["DisBot"].ToString();
     }
 
     public static string ReadTxtFile(string filename)
