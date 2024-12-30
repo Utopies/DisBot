@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace DisBotCS.ReadConfig;
+namespace DisBotCS.Config;
 
-public class ConfRead
+public class ConfReadFiles
 {
     public static string ReadToken()
     {

@@ -1,20 +1,20 @@
 ﻿using DSharpPlus.SlashCommands;
-using DisBotCS.ReadConfig;
+using DisBotCS.Config;
 
-namespace DisBotCS;
+namespace DisBotCS.Command;
 
 public class DisCommand : ApplicationCommandModule
 {
     [SlashCommand("help", "Помощь с командами")]
     public async Task HelpCom(InteractionContext ctx)
     {
-        await ctx.Channel.SendMessageAsync(ConfRead.ReadTxtFile("help.txt", "discord"));
+        await ctx.Channel.SendMessageAsync(ConfReadFiles.ReadTxtFile("help.txt", "discord"));
     }
     
     [SlashCommand("bot_info" , "Информация о боте")]
     public async Task BotInfo(InteractionContext ctx)
     {
-        await ctx.Channel.SendMessageAsync(ConfRead.ReadTxtFile("BotInfo.txt", "discord"));
+        await ctx.Channel.SendMessageAsync(ConfReadFiles.ReadTxtFile("BotInfo.txt", "discord"));
     }
 
     [SlashCommand("nometa", "Избегайте мета вопросов")]
